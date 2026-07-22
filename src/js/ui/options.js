@@ -10,8 +10,10 @@ const saveButton = document.getElementById("save-button");
 const cancelButton = document.getElementById("cancel-button");
 const quickSend = document.getElementById("quick-send");
 const toast = document.getElementById("toast");
+const extensionVersion = document.getElementById("extension-version");
 let channels = [];
 let toastTimer;
+extensionVersion.textContent = browser.runtime.getManifest().version;
 function showToast(message) {
   toast.textContent = message; toast.classList.add("visible"); clearTimeout(toastTimer);
   toastTimer = setTimeout(() => toast.classList.remove("visible"), 3000);

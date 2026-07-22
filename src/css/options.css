@@ -1,7 +1,21 @@
 @import url("tokens.css");
 .wide-field { max-width: 680px; }
+.about-card { margin-top: 28px; }
+.about-heading { border-bottom: 1px solid var(--line); padding-bottom: 18px; }
+.eyebrow { color: var(--green); font: 11px var(--mono); letter-spacing: .14em; margin: 0 0 8px; text-transform: uppercase; }
+.about-heading h2 { line-height: 1.35; margin-bottom: 10px; }
+.about-tagline { color: var(--cyan); font-size: 16px; letter-spacing: .02em; margin: 0 0 8px; }
+.about-heading .muted { margin-bottom: 0; }
+.about-card h3 { color: var(--muted); font-size: 12px; letter-spacing: .1em; margin: 20px 0 10px; text-transform: uppercase; }
+.about-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.about-link { background: var(--glass); border: 1px solid var(--line); border-radius: 8px; display: flex; flex-direction: column; gap: 5px; min-width: 0; padding: 13px; text-decoration: none; transition: border-color .2s, background .2s, transform .2s; }
+.about-link:hover { background: #00ff880b; border-color: #00ff8866; transform: translateY(-2px); }
+.about-link strong { color: var(--text); font-size: 13px; }
+.about-link span { color: var(--cyan); font: 10px var(--mono); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.about-version { border-top: 1px solid var(--line); color: var(--muted); font-size: 11px; margin: 20px 0 0; padding-top: 14px; }
 @media (max-width: 650px) {
   main { width: min(100% - 24px, 900px); padding-top: 24px; }
   .channel { align-items: flex-start; flex-direction: column; }
   .channel-actions { justify-content: flex-start; }
+  .about-links { grid-template-columns: 1fr; }
 }
