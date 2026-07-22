@@ -14,7 +14,7 @@ function show(candidate) {
   preview.src = candidate.url; preview.alt = "Resolved media"; preview.controls = preview.tagName === "VIDEO";
   preview.onclick = () => preview.classList.toggle("zoomed"); media.append(preview);
   const info = document.createElement("div"); info.className = "meta"; info.textContent = [candidate.type || "image", formatBytes(candidate.size), candidate.width && candidate.height ? candidate.width + "×" + candidate.height : ""].filter(Boolean).join(" · "); media.append(info);
-  if (candidate.imu) { const badge = document.createElement("div"); badge.className = "imu-badge"; badge.textContent = "✦ Original found by IMU engine"; media.append(badge); }
+  if (candidate.loraMediaFinder) { const badge = document.createElement("div"); badge.className = "engine-badge"; badge.textContent = "✦ Original found by LoraMediaFinder Engine"; media.append(badge); }
   [...candidatesBox.children].forEach((item) => item.classList.toggle("active", item.dataset.url === candidate.url));
 }
 function init(data) {

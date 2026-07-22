@@ -11,5 +11,5 @@
 .candidate { align-items: flex-start; display: flex; flex-direction: column; gap: 3px; padding: 7px 9px; font-size: 11px; color: var(--cyan); border: 1px solid #00e5ff44; border-radius: 6px; cursor: pointer; background: transparent; text-align: left; }
 .candidate small { color: var(--muted); font: 9px var(--mono); }
 .candidate.active { border-color: var(--green); color: var(--green); }
-.imu-badge { color: var(--green); font: 10px var(--mono); letter-spacing: .04em; margin-top: 6px; text-transform: uppercase; }
+.engine-badge { color: var(--green); font: 10px var(--mono); letter-spacing: .04em; margin-top: 6px; text-transform: uppercase; }
 .note-meta { color: var(--muted); display: flex; font: 10px var(--mono); justify-content: space-between; margin-top: 6px; }

@@ -1,4 +1,4 @@
-/* global browser, LorapokDiscord, LorapokStorage, LorapokIMU */
+/* global browser, LorapokDiscord, LorapokStorage, LoraMediaFinder, LoraMediaFinderVerify, LoraMediaFinderVersion */
 const MENU_ROOT = "lorapok-root";
 const CHANNEL_PREFIX = "lorapok-channel-";
 const MAX_BYTES = 10 * 1024 * 1024;
@@ -31,39 +31,12 @@ async function collect(info, tab) {
   if (info.linkUrl) return [{ url: info.linkUrl, score: 1, reason: "Link" }];
   return [{ url: info.selectionText, score: 1, reason: "Selected text" }];
 }
-async function verify(candidates) {
-  const checked = [];
-  for (const candidate of candidates) {
-    try {
-      const response = await fetch(candidate.url);
-      const type = response.headers.get("content-type") || "";
-      if (!response.ok || !/^(?:image|video)\//i.test(type)) continue;
-      const blob = await response.blob();
-      checked.push({ ...candidate, size: blob.size, type, width: 0, height: 0 });
-    } catch (error) {}
-  }
-  return checked.sort((a, b) => (b.score || 0) - (a.score || 0) || (b.size || 0) - (a.size || 0));
-}
-async function expandWithIMU(candidates) {
-  const expanded = [...candidates];
-  for (const candidate of candidates.slice(0, 8)) {
-    if (!/^https?:\/\//i.test(candidate.url || "")) continue;
-    const results = await LorapokIMU.resolve(candidate.url, { exclude_videos: false });
-    results.forEach((result, index) => {
-      if (!result || !result.url || expanded.some((item) => item.url === result.url)) return;
-      expanded.push({
-        url: result.url,
-        score: (result.is_original ? 5000 : 0) + (result.likely_bigger ? 1000 : 0) - index,
-        reason: "IMU original resolver",
-        imu: true,
-        video: Boolean(result.video)
-      });
-    });
-  }
-  return expanded;
-}
 async function prepare(request) {
-  const candidates = await verify(await expandWithIMU(request.candidates));
+  const expanded = LoraMediaFinder.resolve(request.candidates);
+  const candidates = await LoraMediaFinderVerify.verify(expanded);
+  candidates.forEach((candidate) => {
+    candidate.loraMediaFinder = Boolean(candidate.rule || candidate.reason?.includes("rule"));
+  });
   return { ...request, candidates, selected: candidates[0] || request.candidates[0] };
 }
 async function upload(channel, request) {

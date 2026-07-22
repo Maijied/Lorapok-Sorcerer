@@ -1,10 +1,12 @@
 importScripts(
   "vendor/webextension-polyfill/browser-polyfill.min.js",
-  "vendor/maxurl/userscript_smaller.user.js",
-  "js/lib/url-rules.js",
-  "js/lib/srcset.js",
+  "js/engine/version.js",
+  "js/engine/rules/generic.js",
+  "js/engine/rules/sites.js",
+  "js/engine/rules/dom.js",
+  "js/engine/verify.js",
+  "js/engine/core.js",
   "js/lib/discord.js",
   "js/lib/storage.js",
-  "js/lib/imu.js",
   "js/background.js"
 );

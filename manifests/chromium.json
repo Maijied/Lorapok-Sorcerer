@@ -10,8 +10,11 @@
     "matches": ["<all_urls>"],
     "js": [
       "vendor/webextension-polyfill/browser-polyfill.min.js",
-      "js/lib/url-rules.js",
-      "js/lib/srcset.js",
+      "js/engine/version.js",
+      "js/engine/rules/generic.js",
+      "js/engine/rules/sites.js",
+      "js/engine/rules/dom.js",
+      "js/engine/core.js",
       "js/content/resolver.js"
     ],
     "run_at": "document_idle"
