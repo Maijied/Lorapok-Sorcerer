@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540">
+  <rect width="960" height="540" fill="#050505"/>
+  <rect x="40" y="40" width="880" height="460" rx="18" fill="#111" stroke="#00ff88" stroke-opacity=".35"/>
+  <path d="M80 120h800M80 175h220M80 220h800M80 275h800M80 330h800M80 385h800" stroke="#ffffff" stroke-opacity=".08"/>
+  <text x="80" y="95" fill="#00ff88" font-family="sans-serif" font-size="28">Lorapok Sorcerer · UI preview</text>
+  <text x="80" y="465" fill="#8b9d98" font-family="monospace" font-size="16">Screenshot placeholder — replace with a product capture</text>
+</svg>
