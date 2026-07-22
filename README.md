@@ -6,6 +6,8 @@
 resolution component.
 
 ![CI](https://github.com/lorapok/lorapok-sorcerer/actions/workflows/ci.yml/badge.svg)
+[![Release](https://img.shields.io/github/v/release/Maijied/Lorapok-Sorcerer?sort=semver)](https://github.com/Maijied/Lorapok-Sorcerer/releases)
+[![Pages](https://img.shields.io/badge/site-GitHub%20Pages-00e5ff)](https://maijied.github.io/Lorapok-Sorcerer/)
 
 > Building the Future. One Line at a Time.
 
@@ -41,6 +43,12 @@ dist/lorapok-sorcerer-chromium-2.0.0.zip
 
 See [docs/INSTALL.md](docs/INSTALL.md) for browser-specific loading and
 publishing instructions.
+
+## Download
+
+Visit the [Lorapok Sorcerer product website](https://maijied.github.io/Lorapok-Sorcerer/)
+or download the latest browser builds from
+[GitHub Releases](https://github.com/Maijied/Lorapok-Sorcerer/releases/latest).
 
 ## Documentation
 

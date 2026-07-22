@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Lorapok Sorcerer sends original media from any page to Discord with the first-party LoraMediaFinder Engine.">
+  <meta property="og:title" content="Lorapok Sorcerer · Original media, delivered">
+  <meta property="og:description" content="Send original images and videos from any page to Discord — like magic.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://maijied.github.io/Lorapok-Sorcerer/">
+  <meta name="theme-color" content="#050505">
+  <title>Lorapok Sorcerer · Original media, delivered</title>
+  <link rel="icon" href="assets/logo.svg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="grid-glow" aria-hidden="true"></div>
+  <nav class="nav" aria-label="Primary navigation">
+    <a class="nav-brand" href="#"><img src="assets/logo.svg" alt=""><span>Lorapok <b>Sorcerer</b></span></a>
+    <div class="nav-links"><a href="#features">Features</a><a href="#engine">Engine</a><a href="#install">Install</a><a href="#docs">Docs</a><a href="https://github.com/Maijied/Lorapok-Sorcerer">GitHub</a></div>
+    <a class="nav-cta" href="#install">Get Sorcerer <span>↗</span></a>
+  </nav>
+  <main>
+    <section class="hero" id="top">
+      <div class="eyebrow"><span class="pulse"></span> LORAPOK LABS / MEDIA TOOLING <span class="version-badge" data-version>v2.0.0</span></div>
+      <h1>Original media.<br><em>Delivered like magic.</em></h1>
+      <p class="hero-copy">Send original images and video from any page to Discord — like magic. Sorcerer finds the source, lets you add context, and delivers it to the right channel.</p>
+      <div class="hero-actions"><a class="button primary" href="#install">Download Sorcerer <span>↓</span></a><a class="button ghost" href="#engine">Meet the engine <span>→</span></a></div>
+      <div class="hero-signal"><span></span><span></span><span></span><code>lorapok://signal/original-media</code><b>READY</b></div>
+      <div class="hero-orbit" aria-hidden="true"><img src="assets/logo.svg" alt=""><i></i><i></i><i></i></div>
+    </section>
+    <section class="section" id="features">
+      <div class="section-head"><div><span class="kicker">01 / CAPABILITIES</span><h2>A sharper path from page<br>to channel.</h2></div><p>Built for collectors, researchers, and teams who care about the original—not the thumbnail.</p></div>
+      <div class="feature-grid">
+        <article class="feature-card featured"><span class="icon">⌁</span><h3>Original-media finder</h3><p>Resolve source-quality images and video with DOM intelligence, 28+ site rules, and a clean scoring pipeline.</p><small>THE LORAMEDIAFINDER ENGINE</small></article>
+        <article class="feature-card"><span class="icon">◈</span><h3>Preview + notes</h3><p>Inspect candidates, zoom in, add markdown-friendly context, then send with confidence.</p></article>
+        <article class="feature-card"><span class="icon">◎</span><h3>Multi-channel webhooks</h3><p>Keep Discord destinations organized with validation, testing, and one-click enablement.</p></article>
+        <article class="feature-card"><span class="icon">↗</span><h3>Text / URL sends</h3><p>Use the toolbar composer or context menu to send a link, selection, or note.</p></article>
+        <article class="feature-card"><span class="icon">◷</span><h3>Signal history</h3><p>Review your latest sends with thumbnails, channels, timestamps, and status.</p></article>
+        <article class="feature-card"><span class="icon">⌑</span><h3>Private by design</h3><p>No tracking. No backend. Your webhooks and history stay in browser storage.</p></article>
+      </div>
+    </section>
+    <section class="engine-section section" id="engine">
+      <div class="section-head"><div><span class="kicker">02 / THE ENGINE</span><h2>Meet LoraMediaFinder.</h2></div><p>A first-party, standalone library that turns messy media URLs into confident originals.</p></div>
+      <div class="engine-layout"><div class="pipeline">
+        <div class="pipeline-node"><b>01</b><strong>Normalize</strong><span>clean URL + metadata</span></div><div class="pipeline-line"></div><div class="pipeline-node active"><b>02</b><strong>Run rules</strong><span>generic + site registry</span></div><div class="pipeline-line"></div><div class="pipeline-node"><b>03</b><strong>Score</strong><span>source-quality signals</span></div><div class="pipeline-line"></div><div class="pipeline-node"><b>04</b><strong>Verify</strong><span>type + byte confidence</span></div>
+      </div><div class="engine-stats"><div><strong data-count="28">28+</strong><span>site rule families</span></div><div><strong data-count="4">4</strong><span>pipeline stages</span></div><div><strong>0</strong><span>remote engine calls</span></div></div></div>
+    </section>
+    <section class="section steps"><div class="section-head"><div><span class="kicker">03 / HOW IT WORKS</span><h2>Three clicks. One clean signal.</h2></div></div><div class="step-grid"><article><b>01</b><h3>Right-click</h3><p>Choose a channel from the Sorcerer context menu on any image, link, or selection.</p></article><article><b>02</b><h3>Choose your source</h3><p>Preview candidates, see the engine badge, add a note, and pick the best resolution.</p></article><article><b>03</b><h3>Send to Discord</h3><p>Upload as a formatted attachment, with a resilient URL fallback when needed.</p></article></div></section>
+    <section class="section install" id="install"><div class="section-head"><div><span class="kicker">04 / INSTALL</span><h2>Pick your portal.</h2></div><p>One shared product. Native builds for your favorite browser.</p></div><div class="browser-tabs" role="tablist"><button class="active" data-browser="firefox" role="tab">Firefox</button><button data-browser="chromium" role="tab">Chrome</button><button data-browser="chromium" role="tab">Edge</button><button data-browser="chromium" role="tab">Opera</button><button data-browser="chromium" role="tab">Brave</button></div><div class="install-panel"><div><span class="install-mark">◌</span><h3>Load in <span id="browser-name">Firefox</span></h3><p>Download the latest signed-ready build, then load it from your browser's extension settings. For local development, use the unpacked source or temporary add-on flow.</p><a class="button primary download-link" data-target="firefox" href="https://github.com/Maijied/Lorapok-Sorcerer/releases">Download Firefox build ↓</a></div><ol><li>Download the browser archive.</li><li>Open extension settings and enable developer mode.</li><li>Load the archive or unpacked directory.</li></ol></div></section>
+    <section class="section faq" id="docs"><div class="section-head"><div><span class="kicker">05 / FIELD NOTES</span><h2>Questions, answered.</h2></div><p>Everything you need to move from curious to enchanted.</p></div><details open><summary>Does Sorcerer upload my media anywhere else?</summary><p>No. Sorcerer sends directly from your browser to the Discord webhook you configure. There is no Lorapok backend or tracking layer.</p></details><details><summary>What happens when the original cannot be found?</summary><p>The engine keeps the strongest page candidates, verifies media type and size, and offers a URL fallback when an attachment is unavailable.</p></details><details><summary>Which browsers are supported?</summary><p>Firefox uses MV2. Chrome, Edge, Opera, and Brave use the shared Chromium MV3 build.</p></details></section>
+  </main>
+  <footer class="footer"><div><a class="nav-brand" href="#top"><img src="assets/logo.svg" alt=""><span>Lorapok <b>Sorcerer</b></span></a><p>A Lorapok Labs product.<br>Building the Future. One Line at a Time.</p></div><div class="footer-links"><a href="https://github.com/maijied">GitHub</a><a href="https://www.linkedin.com/showcase/lorapok/">LinkedIn</a><a href="https://www.producthunt.com/products/lorapok-atlas-api-directory">Product Hunt</a><a href="https://www.reddit.com/r/LorapokLabs/">Reddit</a><a href="https://www.instagram.com/lorapoklabs/">Instagram</a><a href="https://www.facebook.com/lorapoklabs">Facebook</a><a href="https://wellfound.com/u/maizied">Wellfound</a><a href="https://maijied.github.io/Maijied">Portfolio</a><a href="https://lorapok.github.io">OSS Ecosystem</a><a href="https://maijied.github.io/Lorapok-Labs-Bible/">Brand Bible</a></div><small>© <span id="year"></span> Lorapok Labs · <a href="https://github.com/Maijied/Lorapok-Sorcerer">Open source on GitHub</a></small></footer>
+  <script src="app.js"></script>
+</body>
+</html>

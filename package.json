@@ -6,7 +6,11 @@
   "scripts": {
     "lint": "web-ext lint --source-dir src",
     "test": "node --test",
-    "build": "bash scripts/build.sh"
+    "build": "bash scripts/build.sh",
+    "check-version": "bash scripts/check-version.sh",
+    "version:patch": "bash scripts/version.sh patch",
+    "version:minor": "bash scripts/version.sh minor",
+    "version:major": "bash scripts/version.sh major"
   },
   "devDependencies": {
     "web-ext": "^8.9.0",

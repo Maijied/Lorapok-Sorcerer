@@ -2,6 +2,8 @@ name: Release
 on:
   push:
     tags: ["v*"]
+permissions:
+  contents: write
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -10,7 +12,28 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: 20, cache: npm }
       - run: npm ci
+      - name: Verify tag and version
+        shell: bash
+        run: |
+          version="$(node -p "require('./package.json').version")"
+          tag="${GITHUB_REF_NAME#v}"
+          if [[ "$tag" != "$version" ]]; then
+            echo "::error::Release tag v$tag does not match package.json version $version"
+            exit 1
+          fi
+          bash scripts/check-version.sh
       - run: bash scripts/build.sh all
+      - name: Rename release archives
+        shell: bash
+        run: |
+          version="$(node -p "require('./package.json').version")"
+          for target in firefox chromium; do
+            mv "dist/lorapok-sorcerer-${target}-${version}.zip" \
+              "dist/lorapok-sorcerer-${target}-v${version}.zip"
+          done
       - uses: softprops/action-gh-release@v2
         with:
-          files: dist/*.zip
+          files: dist/lorapok-sorcerer-*-v*.zip
+          generate_release_notes: true
+          overwrite_files: true
+          prerelease: ${{ contains(github.ref_name, '-') }}

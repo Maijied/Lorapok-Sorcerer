@@ -31,3 +31,33 @@ Create an Opera developer account, upload the Chromium ZIP, provide listing
 metadata and screenshots, and submit for review.
 
 Keep release tags aligned with the manifest version (`v2.0.0`, for example).
+
+## Automated tagged releases
+
+The release workflow is the canonical path for public artifacts:
+
+1. Run `npm ci`, `bash scripts/check-version.sh`, and
+   `bash scripts/test.sh` locally.
+2. Create a release commit with the synchronized version:
+
+   ```sh
+   ./scripts/version.sh patch
+   git add package.json package-lock.json manifests src/manifest.json site/version.json
+   git commit -m "Release v2.0.1"
+   git tag v2.0.1
+   git push origin main --tags
+   ```
+
+3. The `v*` workflow verifies that the tag exactly matches
+   `package.json`, builds Firefox and Chromium archives, renames them to
+   `lorapok-sorcerer-<target>-v<version>.zip`, and attaches both to the
+   GitHub Release.
+4. Re-running the same tag overwrites matching assets. Tags containing a
+   prerelease suffix such as `v2.1.0-beta.1` are marked as prereleases.
+   GitHub generates notes from commits since the previous tag.
+
+## GitHub Pages
+
+In repository settings, open **Pages**, choose **GitHub Actions** as the
+source, and save. The `pages.yml` workflow deploys `site/` on pushes that
+touch the website and can also be started manually from the Actions tab.

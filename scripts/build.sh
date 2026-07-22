@@ -3,7 +3,7 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 TARGET="${1:-all}"
-VERSION="${npm_package_version:-2.0.0}"
+VERSION="$(node -p "require('./package.json').version")"
 BUILD_ROOT="$ROOT/.build"
 trap 'rm -rf "$BUILD_ROOT"' EXIT
 
