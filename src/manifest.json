@@ -1,0 +1,63 @@
+{
+  "manifest_version": 2,
+  "name": "Lorapok Sorcerer",
+  "version": "2.0.0",
+  "description": "A Lorapok Labs sorcerer for sending original media to Discord.",
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "notifications",
+    "tabs",
+    "<all_urls>"
+  ],
+  "background": {
+    "scripts": [
+      "js/lib/url-rules.js",
+      "js/lib/srcset.js",
+      "js/lib/discord.js",
+      "js/lib/storage.js",
+      "js/background.js"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": [
+        "js/lib/url-rules.js",
+        "js/lib/srcset.js",
+        "js/content/resolver.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "browser_action": {
+    "default_title": "Lorapok Sorcerer",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "64": "icons/icon-64.png",
+    "96": "icons/icon-96.png",
+    "128": "icons/icon-128.png"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "a2b-media-sender@devin.ai",
+      "strict_min_version": "109.0",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
+    }
+  }
+}

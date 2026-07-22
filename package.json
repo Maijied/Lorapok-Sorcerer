@@ -1,0 +1,14 @@
+{
+  "name": "lorapok-sorcerer",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Lorapok Labs Firefox extension for sending media to Discord",
+  "scripts": {
+    "lint": "web-ext lint --source-dir src",
+    "test": "node --test",
+    "build": "bash scripts/build.sh"
+  },
+  "devDependencies": {
+    "web-ext": "^8.9.0"
+  }
+}

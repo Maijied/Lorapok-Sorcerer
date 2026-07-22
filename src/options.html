@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Lorapok Sorcerer · Settings</title><link rel="stylesheet" href="css/options.css"></head>
+<body><main>
+  <header class="brand"><img src="icons/icon-96.png" alt=""><div><h1>Lorapok Sorcerer</h1><p>A Lorapok Labs product · Discord media alchemy</p></div></header>
+  <section class="card wide-field"><h2>Webhook channels</h2><form id="channel-form">
+    <input type="hidden" id="channel-id"><label for="channel-name">Channel name</label><input id="channel-name" required maxlength="80" placeholder="Research archive">
+    <label for="webhook-url">Discord webhook URL</label><input id="webhook-url" type="url" required placeholder="https://discord.com/api/webhooks/...">
+    <p id="form-error" class="error" role="alert"></p><div class="actions"><button type="submit" id="save-button">Add channel</button><button type="button" id="cancel-button" class="secondary hidden">Cancel edit</button></div>
+  </form></section>
+  <section class="card wide-field"><h2>Channels</h2><div id="channel-list"></div><p id="empty-state" class="muted">No channels configured. Add a webhook above.</p></section>
+  <section class="card wide-field"><h2>Sending mode</h2><label class="toggle"><input id="quick-send" type="checkbox"> Quick-send image context actions (skip preview)</label><p class="muted">When off, every send opens a preview window where you can select the original candidate and add a note.</p></section>
+  <div id="toast" class="toast" role="status"></div>
+</main><script src="js/ui/options.js"></script></body></html>

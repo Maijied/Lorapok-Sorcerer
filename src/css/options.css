@@ -1,0 +1,7 @@
+@import url("tokens.css");
+.wide-field { max-width: 680px; }
+@media (max-width: 650px) {
+  main { width: min(100% - 24px, 900px); padding-top: 24px; }
+  .channel { align-items: flex-start; flex-direction: column; }
+  .channel-actions { justify-content: flex-start; }
+}

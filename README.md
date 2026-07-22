@@ -1,23 +1,44 @@
-# A2B Media Sender
+# Lorapok Sorcerer
 
-A small Firefox WebExtension for sending images and animated GIFs to Discord
-channels through webhooks.
+**Lorapok Sorcerer** is a Lorapok Labs Firefox WebExtension that resolves
+original/full-resolution images and sends them to Discord webhooks.
 
-## Setup
+## Features
 
-1. In Discord, open a channel's **Channel Settings → Integrations → Webhooks**,
-   create a webhook, and copy its URL.
-2. Load the extension temporarily in Firefox: open `about:debugging`, choose
-   **This Firefox**, click **Load Temporary Add-on**, and select this
-   directory's `manifest.json`.
-3. Open the extension's settings page from the add-ons manager. Add a friendly
-   name and webhook URL for each channel, then enable the channels you want in
-   the image context menu.
-4. Right-click an image on any website, choose **Send to A2B**, and select a
-   channel.
+- Right-click images, selected text, or links and choose **Send to A2B**.
+- Finds high-resolution `srcset`, `<picture>`, lazy-load, linked, metadata, and
+  de-thumbnailed image candidates.
+- Opens a branded preview window by default, with candidate switching, image
+  details, note/links, and channel selection.
+- Uploads media as a Discord multipart attachment. Files over 10 MB or failed
+  downloads fall back to a URL-only message.
+- Toolbar popup for sending text or URLs.
+- Options for multiple webhooks, per-channel enablement, test messages, and
+  quick-send mode.
 
-For a distributable package, use the included `a2b-media-sender.zip` (or create
-one with `npx web-ext build`). The zip must contain `manifest.json` at its root.
+## Temporary Firefox install
 
-Images up to 8 MB are uploaded directly as files. If an image cannot be
-fetched or is too large, the extension sends its URL instead.
+1. In Discord, open **Channel Settings → Integrations → Webhooks**, create a
+   webhook, and copy its URL.
+2. Run `npm install` in this repository.
+3. Open `about:debugging` in Firefox, choose **This Firefox**, click **Load
+   Temporary Add-on**, and select `src/manifest.json`.
+4. Open the extension settings, add the webhook, and enable it.
+
+## Build and test
+
+```sh
+npm ci
+./scripts/test.sh
+./scripts/build.sh
+```
+
+The build output is placed in `dist/lorapok-sorcerer-2.0.0.zip` with
+`manifest.json` at the archive root. The extension is plain JavaScript and
+Manifest V2; no bundler is required.
+
+## Development
+
+Pure URL rules, srcset parsing, Discord payload, and storage helpers are
+covered by Node's built-in `node:test` runner. CI runs lint, tests, JavaScript
+syntax checks, and the packaged build on pushes and pull requests.
