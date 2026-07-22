@@ -2,7 +2,7 @@
 <html lang="en">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Lorapok Sorcerer · Settings</title><link rel="stylesheet" href="css/options.css"></head>
 <body><main>
-  <header class="brand"><img src="icons/icon-96.png" alt=""><div><h1>Lorapok Sorcerer</h1><p>A Lorapok Labs product · Discord media alchemy</p></div></header>
+  <header class="brand"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><path d="m32 4 24 14v28L32 60 8 46V18z" fill="none" stroke="currentColor" stroke-width="3"/><path d="m24 40 17-17M36 17l4 6 7 1-6 5 2 7-7-4-6 4 2-7-5-5 7-1z" fill="none" stroke="currentColor" stroke-width="2"/></svg><div><h1>Lorapok Sorcerer</h1><p>A Lorapok Labs product · Discord media alchemy</p><span class="engine-tag">Powered by LoraMediaFinder Engine</span></div><span class="version-chip" id="header-version">v—</span></header>
   <nav class="tab-nav" aria-label="Settings sections">
     <button class="tab-button active" type="button" data-tab="channels">Channels</button>
     <button class="tab-button" type="button" data-tab="sending">Sending</button>
@@ -10,13 +10,13 @@
     <button class="tab-button" type="button" data-tab="about">About</button>
   </nav>
   <section id="channels-panel" class="card wide-field tab-panel active"><h2>Webhook channels</h2><form id="channel-form">
-    <input type="hidden" id="channel-id"><label for="channel-name">Channel name</label><input id="channel-name" required maxlength="80" placeholder="Research archive">
-    <label for="webhook-url">Discord webhook URL</label><input id="webhook-url" type="url" required placeholder="https://discord.com/api/webhooks/...">
+    <input type="hidden" id="channel-id"><label for="channel-name">Channel name</label><input id="channel-name" required maxlength="80" placeholder="Research archive" aria-describedby="form-error">
+    <label for="webhook-url">Discord webhook URL</label><input id="webhook-url" type="url" required placeholder="https://discord.com/api/webhooks/..." aria-describedby="form-error">
     <p id="form-error" class="error" role="alert"></p><div class="actions"><button type="submit" id="save-button">Add channel</button><button type="button" id="cancel-button" class="secondary hidden">Cancel edit</button></div>
   </form></section>
-  <section id="channel-list-panel" class="card wide-field tab-panel active"><h2>Channels</h2><div id="channel-list"></div><p id="empty-state" class="muted">No channels configured. Add a webhook above.</p></section>
-  <section id="sending-panel" class="card wide-field tab-panel"><h2>Sending mode</h2><label class="toggle"><input id="quick-send" type="checkbox"> Quick-send image context actions (skip preview)</label><p class="muted">When off, every send opens a preview window where you can select the original candidate and add a note.</p></section>
-  <section id="history-panel" class="card wide-field tab-panel"><h2>Recent sends</h2><div id="history-list"></div><p id="history-empty" class="muted">Your recent sends will appear here.</p></section>
+  <section id="channel-list-panel" class="card wide-field tab-panel active"><h2>Channels</h2><div id="channel-list"></div><p id="empty-state" class="empty-state"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="m24 3 18 10v22L24 45 6 35V13zM15 25h18M24 16v18" fill="none" stroke="currentColor" stroke-width="2"/></svg><strong>No channels configured</strong><span>Add a Discord webhook above to begin.</span></p></section>
+  <section id="sending-panel" class="card wide-field tab-panel"><h2>Sending mode</h2><label class="toggle"><input id="quick-send" type="checkbox" role="switch" aria-label="Enable quick-send mode"><span class="switch"></span><span>Quick-send image context actions (skip preview)</span></label><p class="muted">When off, every send opens a preview window where you can select the original candidate and add a note.</p></section>
+  <section id="history-panel" class="card wide-field tab-panel"><h2>Recent sends</h2><div id="history-list"></div><p id="history-empty" class="empty-state"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="m24 3 18 10v22L24 45 6 35V13zM15 25h18M24 16v18" fill="none" stroke="currentColor" stroke-width="2"/></svg><strong>No sends yet</strong><span>Your recent signals will appear here.</span></p></section>
   <section id="about-panel" class="card wide-field about-card tab-panel">
     <div class="about-heading">
       <p class="eyebrow">Lorapok Labs</p>

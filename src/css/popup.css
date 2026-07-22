@@ -1,10 +1,12 @@
 @import url("tokens.css");
-body { width: 330px; }
-main { width: auto; padding: 18px; }
+body { min-width: 280px; width: 330px; }
+main { width: auto; padding: var(--space-5); }
 .brand { margin-bottom: 20px; }
-.brand img { width: 38px; height: 38px; }
+.brand-mark { height: 38px; width: 38px; }
 .brand strong, .brand small { display: block; }
 .brand small { color: var(--muted); margin-top: 3px; }
 textarea { min-height: 100px; }
 .actions { margin-top: 14px; }
 #status { color: var(--green); min-height: 18px; font-size: 12px; }
+#status.error { color: var(--status-error); }
+@media (max-width: 320px) { body { width: 100%; } main { padding: var(--space-4); } }

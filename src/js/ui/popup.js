@@ -9,5 +9,5 @@ document.getElementById("settings").onclick = () => browser.runtime.openOptionsP
 document.getElementById("send").onclick = () => {
   const text = compose.value.trim(); if (!text || !channel.value) { status.textContent = "Add text and select a channel."; return; }
   status.textContent = "Sending…"; browser.runtime.sendMessage({ type: "popup-send", text, channelId: channel.value })
-    .then(() => { status.textContent = "Signal sent."; compose.value = ""; }).catch(() => { status.textContent = "Send failed."; });
+    .then(() => { status.classList.remove("error"); status.textContent = "Signal sent."; compose.value = ""; }).catch(() => { status.classList.add("error"); status.textContent = "Send failed."; });
 };

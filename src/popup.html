@@ -1,5 +1,5 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Lorapok Sorcerer</title><link rel="stylesheet" href="css/popup.css"></head><body><main>
-<header class="brand"><img src="icons/icon-48.png" alt=""><div><strong>Lorapok Sorcerer</strong><small>Lorapok Labs</small></div></header>
-<label for="compose">Compose a message or URL</label><textarea id="compose" placeholder="Paste a URL or write a note…"></textarea>
-<label for="channel">Send to</label><select id="channel"></select><div class="actions"><button id="send">Send signal</button><button id="settings" class="secondary">Settings</button></div><p id="status"></p>
+<header class="brand"><svg class="brand-mark" viewBox="0 0 64 64" aria-hidden="true"><path d="m32 4 24 14v28L32 60 8 46V18z" fill="none" stroke="currentColor" stroke-width="3"/><path d="m24 40 17-17M36 17l4 6 7 1-6 5 2 7-7-4-6 4 2-7-5-5 7-1z" fill="none" stroke="currentColor" stroke-width="2"/></svg><div><strong>Lorapok Sorcerer</strong><small>LoraMediaFinder Engine</small></div></header>
+<label for="compose">Compose a message or URL</label><textarea id="compose" aria-label="Message or URL" placeholder="Paste a URL or write a note…"></textarea>
+<label for="channel">Send to</label><select id="channel" aria-label="Discord channel"></select><div class="actions"><button id="send">Send signal</button><button id="settings" class="secondary">Settings</button></div><p id="status" role="status"></p>
 </main><script src="vendor/webextension-polyfill/browser-polyfill.min.js"></script><script src="js/ui/popup.js"></script></body></html>

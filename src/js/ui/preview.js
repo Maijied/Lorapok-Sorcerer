@@ -14,11 +14,14 @@ function show(candidate) {
   preview.src = candidate.url; preview.alt = "Resolved media"; preview.controls = preview.tagName === "VIDEO";
   preview.onclick = () => preview.classList.toggle("zoomed"); media.append(preview);
   const info = document.createElement("div"); info.className = "meta"; info.textContent = [candidate.type || "image", formatBytes(candidate.size), candidate.width && candidate.height ? candidate.width + "×" + candidate.height : ""].filter(Boolean).join(" · "); media.append(info);
-  if (candidate.loraMediaFinder) { const badge = document.createElement("div"); badge.className = "engine-badge"; badge.textContent = "✦ Original found by LoraMediaFinder Engine"; media.append(badge); }
+  if (candidate.loraMediaFinder) { const badge = document.createElement("div"); badge.className = "engine-badge"; badge.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 2 8 5v10l-8 5-8-5V7zM8 12h8M12 8v8" fill="none" stroke="currentColor" stroke-width="1.5"/></svg> Original found by LoraMediaFinder Engine'; media.append(badge); }
   [...candidatesBox.children].forEach((item) => item.classList.toggle("active", item.dataset.url === candidate.url));
 }
 function init(data) {
-  request = data; selected = data.selected; note.value = data.note || ""; show(selected);
+  request = data; selected = data.selected; note.value = data.note || ""; if (selected) show(selected);
+  if (!data.candidates?.length) {
+    media.innerHTML = '<div class="empty-state"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="m24 3 18 10v22L24 45 6 35V13zM15 25h18M24 16v18" fill="none" stroke="currentColor" stroke-width="2"/></svg><strong>No verified media found</strong><span>Try another candidate or send the source URL.</span></div>';
+  }
   data.candidates.forEach((candidate, index) => { const button = document.createElement("button"); button.className = "candidate"; button.dataset.url = candidate.url; const name = document.createElement("span"); name.textContent = (index + 1) + " · " + (candidate.reason || "candidate"); const badge = document.createElement("small"); badge.textContent = [formatBytes(candidate.size), candidate.width && candidate.height ? candidate.width + "×" + candidate.height : ""].filter(Boolean).join(" · "); button.append(name, badge); button.onclick = () => show(candidate); candidatesBox.append(button); });
   browser.storage.local.get({ channels: [] }).then((channels) => channels.channels.filter((item) => item.enabled).forEach((item) => channel.add(new Option(item.name, item.id))));
 }
@@ -30,5 +33,5 @@ note.addEventListener("keydown", (event) => { if (event.key === "Enter" && !even
 document.getElementById("send").onclick = () => {
   if (!selected) return; status.textContent = "Sending…";
   browser.runtime.sendMessage({ type: "preview-send", channelId: channel.value || request.channelId, request: { ...request, selected, note: note.value } })
-    .then(() => { status.textContent = "Sent successfully."; setTimeout(() => window.close(), 700); }).catch(() => { status.textContent = "Send failed."; });
+    .then(() => { status.classList.remove("error"); status.textContent = "Sent successfully."; setTimeout(() => window.close(), 700); }).catch(() => { status.classList.add("error"); status.textContent = "Send failed."; });
 };
