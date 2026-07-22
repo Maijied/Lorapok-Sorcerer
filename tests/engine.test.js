@@ -30,6 +30,11 @@ test("srcset parser ranks width and density descriptors", () => {
 
 test("site rules cover major media hosts", () => {
   assert.match(transformed("https://pbs.twimg.com/media/a.jpg?name=small", "pbs.twimg.com"), /name=orig/);
+  assert.equal(
+    transformed("https://pbs.twimg.com/media/XXX?format=jpg&name=small", "pbs.twimg.com"),
+    "https://pbs.twimg.com/media/XXX?format=jpg&name=orig"
+  );
+  assert.match(transformed("https://pbs.twimg.com/media/without-extension?name=small", "pbs.twimg.com"), /format=jpg/);
   assert.match(transformed("https://upload.wikimedia.org/wikipedia/commons/thumb/a/a/Cat.jpg/320px-Cat.jpg", "upload.wikimedia.org"), /commons\/a\/a\/Cat\.jpg$/);
   assert.match(transformed("https://i.pinimg.com/474x/a/b/c.jpg", "i.pinimg.com"), /originals/);
   assert.doesNotMatch(transformed("https://scontent.fbcdn.net/a.jpg?stp=dst-jpg&_nc_sid=x", "scontent.fbcdn.net"), /stp=/);

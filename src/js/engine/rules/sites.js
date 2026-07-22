@@ -21,8 +21,14 @@
     const next = parsed.pathname.replace(expression, replacement);
     return next === parsed.pathname ? [] : [new URL(next, parsed.origin).href + parsed.search];
   }
+  function twitterVariant(url) {
+    const parsed = parse(url); if (!parsed) return [];
+    parsed.searchParams.set("format", parsed.searchParams.get("format") || "jpg");
+    parsed.searchParams.set("name", "orig");
+    return [parsed.href];
+  }
   const rules = [
-    { name: "Twitter / X", match: /(?:^|\.)twimg\.com$/i, transform: (url) => queryVariant(url, ["name", "format"], { name: "orig" }) },
+    { name: "Twitter / X", match: /(?:^|\.)twimg\.com$/i, transform: twitterVariant },
     { name: "Wikipedia / Wikimedia", match: /(?:^|\.)wikimedia\.org$|(?:^|\.)wikipedia\.org$/i, transform: (url) => {
       const parsed = parse(url); if (!parsed) return [];
       const match = parsed.pathname.match(/^(.*)\/thumb\/(.+)\/[^/]+$/i);
