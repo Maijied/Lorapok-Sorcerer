@@ -18,16 +18,17 @@ function rebuildMenus() {
     }));
   })).catch((error) => console.error("Menu rebuild failed", error));
 }
-async function collect(info) {
-  if (info.contexts?.includes("image")) {
+async function collect(info, tab) {
+  if (info.mediaType === "image") {
     try {
-      const result = await browser.tabs.sendMessage(info.tabId,
-        { type: "collect-candidates", targetElementId: info.targetElementId }, { frameId: info.frameId });
+      const options = typeof info.frameId === "number" ? { frameId: info.frameId } : undefined;
+      const result = await browser.tabs.sendMessage(tab.id,
+        { type: "collect-candidates", targetElementId: info.targetElementId }, options);
       if (result?.candidates?.length) return result.candidates;
     } catch (error) {}
     return [{ url: info.srcUrl, score: 1, reason: "Context image" }];
   }
-  if (info.contexts?.includes("link")) return [{ url: info.linkUrl, score: 1, reason: "Link" }];
+  if (info.linkUrl) return [{ url: info.linkUrl, score: 1, reason: "Link" }];
   return [{ url: info.selectionText, score: 1, reason: "Selected text" }];
 }
 async function verify(candidates) {
@@ -98,16 +99,15 @@ browser.runtime.onMessage.addListener(async (message) => {
   }
   return undefined;
 });
-browser.menus.onClicked.addListener(async (info) => {
+browser.menus.onClicked.addListener(async (info, tab) => {
   if (!String(info.menuItemId).startsWith(CHANNEL_PREFIX)) return;
   const data = await state();
   const channel = data.channels.find((item) => CHANNEL_PREFIX + item.id === info.menuItemId && item.enabled);
   if (!channel) return;
-  const request = { candidates: await collect(info), pageUrl: info.pageUrl || "", note: info.selectionText || "" };
-  if (data.settings.quickSend && info.contexts?.includes("image")) await upload(channel, await prepare(request));
+  const request = { candidates: await collect(info, tab), pageUrl: info.pageUrl || "", note: info.selectionText || "" };
+  if (data.settings.quickSend && info.mediaType === "image") await upload(channel, await prepare(request));
   else { request.channelId = channel.id; await openPreview(request); }
 });
-browser.browserAction.onClicked.addListener(() => browser.runtime.openOptionsPage());
 browser.storage.onChanged.addListener((changes, area) => {
   if (area === "local" && (changes.channels || changes.settings)) rebuildMenus();
 });

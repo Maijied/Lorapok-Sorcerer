@@ -53,7 +53,7 @@
   },
   "browser_specific_settings": {
     "gecko": {
-      "id": "a2b-media-sender@devin.ai",
+      "id": "lorapok-sorcerer@lorapok.dev",
       "strict_min_version": "109.0",
       "data_collection_permissions": {
         "required": ["none"]
