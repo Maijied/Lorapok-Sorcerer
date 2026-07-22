@@ -1,0 +1,36 @@
+{
+  "manifest_version": 3,
+  "name": "Lorapok Sorcerer",
+  "version": "2.0.0",
+  "description": "A Lorapok Labs sorcerer for sending original media to Discord.",
+  "permissions": ["contextMenus", "storage", "notifications", "tabs"],
+  "host_permissions": ["<all_urls>"],
+  "background": {"service_worker": "js/background-sw.js"},
+  "content_scripts": [{
+    "matches": ["<all_urls>"],
+    "js": [
+      "vendor/webextension-polyfill/browser-polyfill.min.js",
+      "js/engine/version.js",
+      "js/engine/rules/generic.js",
+      "js/engine/rules/sites.js",
+      "js/engine/rules/dom.js",
+      "js/engine/core.js",
+      "js/content/resolver.js"
+    ],
+    "run_at": "document_idle"
+  }],
+  "action": {
+    "default_title": "Lorapok Sorcerer",
+    "default_icon": {"16": "icons/icon-16.png", "32": "icons/icon-32.png", "48": "icons/icon-48.png"},
+    "default_popup": "popup.html"
+  },
+  "options_ui": {"page": "options.html", "open_in_tab": true},
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "64": "icons/icon-64.png",
+    "96": "icons/icon-96.png",
+    "128": "icons/icon-128.png"
+  }
+}

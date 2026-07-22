@@ -26,7 +26,7 @@ build_target() {
 }
 
 case "$TARGET" in
-  firefox|chromium)
+  firefox|chromium|edge|opera|brave)
     rm -rf dist
     mkdir -p dist
     build_target "$TARGET"
@@ -36,9 +36,12 @@ case "$TARGET" in
     mkdir -p dist
     build_target firefox
     build_target chromium
+    build_target edge
+    build_target opera
+    build_target brave
     ;;
   *)
-    echo "Usage: $0 [firefox|chromium|all]" >&2
+    echo "Usage: $0 [firefox|chromium|edge|opera|brave|all]" >&2
     exit 2
     ;;
 esac

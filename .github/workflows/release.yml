@@ -27,9 +27,11 @@ jobs:
         shell: bash
         run: |
           version="$(node -p "require('./package.json').version")"
-          for target in firefox chromium; do
-            mv "dist/lorapok-sorcerer-${target}-${version}.zip" \
-              "dist/lorapok-sorcerer-${target}-v${version}.zip"
+          for target in firefox chromium edge opera brave; do
+            if [ -f "dist/lorapok-sorcerer-${target}-${version}.zip" ]; then
+              mv "dist/lorapok-sorcerer-${target}-${version}.zip" \
+                "dist/lorapok-sorcerer-${target}-v${version}.zip"
+            fi
           done
       - uses: softprops/action-gh-release@v2
         with:

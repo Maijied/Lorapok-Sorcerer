@@ -20,6 +20,8 @@ jobs:
       - run: bash scripts/check-version.sh
       - run: bash scripts/test.sh
       - run: bash scripts/build.sh all
+      - name: List all build artifacts
+        run: ls -la dist/
       - uses: actions/upload-artifact@v4
         with:
           name: lorapok-sorcerer-${{ steps.meta.outputs.version }}-${{ steps.meta.outputs.sha }}
