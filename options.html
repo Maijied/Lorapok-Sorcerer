@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A2B Media Sender Settings</title>
+  <link rel="stylesheet" href="css/options.css">
+</head>
+<body>
+  <main>
+    <header>
+      <h1>A2B Media Sender</h1>
+      <p>Choose which Discord webhooks appear in the image context menu.</p>
+    </header>
+    <section class="card">
+      <h2>Add a Discord channel</h2>
+      <form id="channel-form">
+        <input type="hidden" id="channel-id">
+        <label for="channel-name">Channel name</label>
+        <input id="channel-name" required maxlength="80" placeholder="e.g. Memes">
+        <label for="webhook-url">Webhook URL</label>
+        <input id="webhook-url" type="url" required placeholder="https://discord.com/api/webhooks/...">
+        <p id="form-error" class="error" role="alert"></p>
+        <div class="form-actions">
+          <button type="submit" id="save-button">Add channel</button>
+          <button type="button" id="cancel-button" class="secondary hidden">Cancel edit</button>
+        </div>
+      </form>
+    </section>
+    <section class="card">
+      <h2>Your channels</h2>
+      <div id="channel-list" class="channel-list"></div>
+      <p id="empty-state" class="muted">No webhooks configured yet.</p>
+    </section>
+    <div id="toast" class="toast" role="status"></div>
+  </main>
+  <script src="js/options.js"></script>
+</body>
+</html>

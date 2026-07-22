@@ -1,0 +1,34 @@
+{
+  "manifest_version": 2,
+  "name": "A2B Media Sender",
+  "version": "1.0.0",
+  "description": "Send images and GIFs from any website to Discord webhooks.",
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "notifications",
+    "<all_urls>"
+  ],
+  "background": {
+    "scripts": [
+      "js/background.js"
+    ]
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "icons": {
+    "48": "icons/icon-48.png",
+    "96": "icons/icon-96.png"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "a2b-media-sender@devin.ai",
+      "strict_min_version": "109.0",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
+    }
+  }
+}
