@@ -2,6 +2,9 @@
 
 **A Lorapok Labs product for original-media discovery and Discord delivery.**
 
+**Powered by the LoraMediaFinder Engine**, a first-party Lorapok Labs media
+resolution component.
+
 ![CI](https://github.com/lorapok/lorapok-sorcerer/actions/workflows/ci.yml/badge.svg)
 
 > Building the Future. One Line at a Time.
@@ -10,10 +13,11 @@
 
 ## Highlights
 
-- **Image Max URL engine** resolves original media across thousands of sites.
+- **LoraMediaFinder Engine** resolves original media with a first-party,
+  standalone rule pipeline.
 - **Smart context menus** handle images, links, and selected text.
-- **Preview-first workflow** with candidate switching, zoom, notes, and IMU
-  provenance.
+- **Preview-first workflow** with candidate switching, zoom, notes, and
+  LoraMediaFinder provenance.
 - **Discord-native delivery** uploads image/video files with formatted embeds
   and a resilient URL fallback.
 - **Cross-browser builds** for Firefox MV2 and Chrome/Edge/Opera/Brave MV3.
@@ -48,8 +52,6 @@ publishing instructions.
 
 ## License
 
-Lorapok Sorcerer application code is licensed under the MIT License. The
-vendored Image Max URL source remains under Apache-2.0; see
-`src/vendor/maxurl/LICENSE.txt`, `src/vendor/maxurl/ATTRIBUTION.md`, and
-[docs/CREDITS.md](docs/CREDITS.md). The webextension polyfill retains its
-upstream MPL-2.0 license.
+Lorapok Sorcerer application code and the LoraMediaFinder Engine are licensed
+under the MIT License. The webextension polyfill retains its upstream MPL-2.0
+license; see [docs/CREDITS.md](docs/CREDITS.md).

@@ -8,9 +8,9 @@ flowchart LR
   Page["Web page"] --> Content["content/resolver.js<br/>DOM candidates + click tracker"]
   Menu["contextMenus event"] --> Background["background.js"]
   Content --> Background
-  Background --> IMU["lib/imu.js"]
-  IMU --> MaxURL["vendor/maxurl<br/>Image Max URL"]
-  Background --> Verify["fetch + content-type/size verification"]
+  Background --> Engine["engine/core.js<br/>LoraMediaFinder Engine"]
+  Engine --> Rules["engine/rules/*<br/>generic + site registry"]
+  Engine --> Verify["engine/verify.js"]
   Verify --> Preview["preview.html"]
   Preview --> Discord["Discord webhook multipart upload"]
   Popup["popup.html"] --> Background
@@ -20,12 +20,14 @@ flowchart LR
 
 ## Modules
 
-- `src/js/content/resolver.js` records the last context-menu target and
-  collects `srcset`, lazy attributes, links, metadata, and fast URL rules.
-- `src/js/lib/url-rules.js` and `src/js/lib/srcset.js` are pure, tested helpers.
-- `src/js/lib/imu.js` adapts Image Max URL's callback engine to a Promise and
-  supplies its XHR-like `do_request` adapter.
-- `src/js/background.js` merges candidates, runs IMU, verifies media, opens the
+- `src/js/content/resolver.js` records the last context-menu target and calls
+  the engine's DOM collector.
+- `src/js/engine/rules/dom.js` extracts `srcset`, lazy attributes, links,
+  metadata, JSON-LD, and CSS background images.
+- `src/js/engine/rules/generic.js` and `sites.js` provide pure URL rules.
+- `src/js/engine/core.js` runs normalize → rules → score → dedupe.
+- `src/js/engine/verify.js` is the injectable network verification stage.
+- `src/js/background.js` runs the engine, verifies candidates, opens the
   preview, and uploads to Discord.
 - `src/js/lib/discord.js` creates webhook payloads and filenames.
 - `src/js/lib/storage.js` normalizes settings and recent history.
@@ -37,9 +39,10 @@ targets use `manifests/chromium.json` and `background-sw.js`, a service worker
 that loads the same shared scripts with `importScripts`. The vendored
 `webextension-polyfill` provides the promise-based `browser.*` API on both.
 
-The IMU vendor build is compatible with the worker because it is loaded as a
-classic script and exposes `globalThis.LorapokMaximage`. No DOM is used by the
-background resolver. DOM inspection remains in the content script.
+The LoraMediaFinder Engine is a standalone, no-network library loaded as
+classic scripts in both background contexts and content scripts. DOM
+inspection remains in the content script; fetch-based media verification is
+isolated in `engine/verify.js` and background.js.
 
 ## Build flow
 

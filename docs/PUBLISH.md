@@ -4,16 +4,15 @@
 
 1. Validate with `./scripts/build.sh firefox`.
 2. Create an AMO developer account and submit the Firefox ZIP.
-3. Include the vendored maxurl Apache-2.0 notice and source attribution.
-4. Complete Mozilla's data-use questionnaire and privacy disclosures.
-5. For local signing, install `web-ext` and run:
+3. Complete Mozilla's data-use questionnaire and privacy disclosures.
+4. For local signing, install `web-ext` and run:
 
    ```sh
    web-ext sign --source-dir .build/firefox --api-key "$AMO_JWT_ISSUER" \
      --api-secret "$AMO_JWT_SECRET"
    ```
 
-6. Upload the signed artifact or let AMO host the signed release.
+5. Upload the signed artifact or let AMO host the signed release.
 
 ## Chrome Web Store
 
