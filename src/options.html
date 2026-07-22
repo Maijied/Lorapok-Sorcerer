@@ -3,14 +3,21 @@
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Lorapok Sorcerer · Settings</title><link rel="stylesheet" href="css/options.css"></head>
 <body><main>
   <header class="brand"><img src="icons/icon-96.png" alt=""><div><h1>Lorapok Sorcerer</h1><p>A Lorapok Labs product · Discord media alchemy</p></div></header>
-  <section class="card wide-field"><h2>Webhook channels</h2><form id="channel-form">
+  <nav class="tab-nav" aria-label="Settings sections">
+    <button class="tab-button active" type="button" data-tab="channels">Channels</button>
+    <button class="tab-button" type="button" data-tab="sending">Sending</button>
+    <button class="tab-button" type="button" data-tab="history">History</button>
+    <button class="tab-button" type="button" data-tab="about">About</button>
+  </nav>
+  <section id="channels-panel" class="card wide-field tab-panel active"><h2>Webhook channels</h2><form id="channel-form">
     <input type="hidden" id="channel-id"><label for="channel-name">Channel name</label><input id="channel-name" required maxlength="80" placeholder="Research archive">
     <label for="webhook-url">Discord webhook URL</label><input id="webhook-url" type="url" required placeholder="https://discord.com/api/webhooks/...">
     <p id="form-error" class="error" role="alert"></p><div class="actions"><button type="submit" id="save-button">Add channel</button><button type="button" id="cancel-button" class="secondary hidden">Cancel edit</button></div>
   </form></section>
-  <section class="card wide-field"><h2>Channels</h2><div id="channel-list"></div><p id="empty-state" class="muted">No channels configured. Add a webhook above.</p></section>
-  <section class="card wide-field"><h2>Sending mode</h2><label class="toggle"><input id="quick-send" type="checkbox"> Quick-send image context actions (skip preview)</label><p class="muted">When off, every send opens a preview window where you can select the original candidate and add a note.</p></section>
-  <section class="card wide-field about-card">
+  <section id="channel-list-panel" class="card wide-field tab-panel active"><h2>Channels</h2><div id="channel-list"></div><p id="empty-state" class="muted">No channels configured. Add a webhook above.</p></section>
+  <section id="sending-panel" class="card wide-field tab-panel"><h2>Sending mode</h2><label class="toggle"><input id="quick-send" type="checkbox"> Quick-send image context actions (skip preview)</label><p class="muted">When off, every send opens a preview window where you can select the original candidate and add a note.</p></section>
+  <section id="history-panel" class="card wide-field tab-panel"><h2>Recent sends</h2><div id="history-list"></div><p id="history-empty" class="muted">Your recent sends will appear here.</p></section>
+  <section id="about-panel" class="card wide-field about-card tab-panel">
     <div class="about-heading">
       <p class="eyebrow">Lorapok Labs</p>
       <h2>About — Lorapok Sorcerer, a Lorapok Labs product</h2>
@@ -33,4 +40,4 @@
     <p class="about-version mono">Version <span id="extension-version">—</span></p>
   </section>
   <div id="toast" class="toast" role="status"></div>
-</main><script src="js/ui/options.js"></script></body></html>
+</main><script src="vendor/webextension-polyfill/browser-polyfill.min.js"></script><script src="js/lib/discord.js"></script><script src="js/lib/storage.js"></script><script src="js/ui/options.js"></script></body></html>

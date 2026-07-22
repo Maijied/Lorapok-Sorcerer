@@ -1,5 +1,10 @@
 @import url("tokens.css");
 .wide-field { max-width: 680px; }
+.tab-nav { display: flex; gap: 6px; margin: 0 0 18px; max-width: 680px; overflow-x: auto; }
+.tab-button { background: transparent; border-color: transparent; box-shadow: none; color: var(--muted); white-space: nowrap; }
+.tab-button:hover, .tab-button.active { background: #00ff8814; border-color: #00ff8866; color: var(--green); }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
 .about-card { margin-top: 28px; }
 .about-heading { border-bottom: 1px solid var(--line); padding-bottom: 18px; }
 .eyebrow { color: var(--green); font: 11px var(--mono); letter-spacing: .14em; margin: 0 0 8px; text-transform: uppercase; }
@@ -13,6 +18,19 @@
 .about-link strong { color: var(--text); font-size: 13px; }
 .about-link span { color: var(--cyan); font: 10px var(--mono); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .about-version { border-top: 1px solid var(--line); color: var(--muted); font-size: 11px; margin: 20px 0 0; padding-top: 14px; }
+.channel-details { align-items: center; display: flex; gap: 11px; min-width: 0; }
+.channel-avatar { align-items: center; background: var(--blue); border: 1px solid #00ff8866; border-radius: 50%; color: var(--green); display: flex; flex: 0 0 34px; font-weight: 700; height: 34px; justify-content: center; text-transform: uppercase; width: 34px; }
+.history-item { align-items: center; border-top: 1px solid var(--line); display: flex; gap: 12px; padding: 13px 0; }
+.history-item:first-child { border-top: 0; }
+.history-thumb { align-items: center; background: var(--surface-raised); border: 1px solid var(--line); border-radius: 7px; color: var(--cyan); display: flex; flex: 0 0 46px; height: 46px; justify-content: center; overflow: hidden; }
+.history-thumb img { height: 100%; object-fit: cover; width: 100%; }
+.history-copy { min-width: 0; }
+.history-copy strong, .history-copy span { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.history-copy strong { font-size: 13px; }
+.history-copy span { color: var(--muted); font: 10px var(--mono); margin-top: 4px; }
+.history-time { color: var(--muted); font-size: 11px; margin-left: auto; white-space: nowrap; }
+input.valid { border-color: #00ff8877; }
+input.invalid { border-color: #ff3d7177; }
 @media (max-width: 650px) {
   main { width: min(100% - 24px, 900px); padding-top: 24px; }
   .channel { align-items: flex-start; flex-direction: column; }

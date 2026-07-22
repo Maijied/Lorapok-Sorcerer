@@ -1,6 +1,10 @@
 /* global browser, LorapokUrlRules, LorapokSrcset */
 (function () {
   "use strict";
+  let lastTarget = null;
+  document.addEventListener("contextmenu", (event) => {
+    lastTarget = event.target;
+  }, true);
   function add(list, url, score, reason) {
     if (!url) return;
     const cleaned = LorapokUrlRules.cleanUrl(url, document.baseURI);
@@ -33,7 +37,7 @@
   browser.runtime.onMessage.addListener((message) => {
     if (message.type !== "collect-candidates") return undefined;
     let target = null;
-    try { target = browser.menus.getTargetElement(message.targetElementId); } catch (error) {}
+    target = target || lastTarget;
     return Promise.resolve({ candidates: inspect(target) });
   });
 }());

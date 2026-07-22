@@ -2,7 +2,8 @@
 set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
-npx web-ext lint --source-dir src
+echo "Linting Firefox build output"
+bash scripts/build.sh firefox
 node --test
-find src -name '*.js' -print0 | xargs -0 -n1 node --check
+find src/js -type f -name '*.js' ! -path 'src/vendor/*' -print0 | xargs -0 -n1 node --check
 echo "All Lorapok Sorcerer checks passed."

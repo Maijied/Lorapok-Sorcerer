@@ -1,4 +1,4 @@
-/* global browser, LorapokDiscord, LorapokStorage */
+/* global browser, LorapokDiscord, LorapokStorage, LorapokIMU */
 const MENU_ROOT = "lorapok-root";
 const CHANNEL_PREFIX = "lorapok-channel-";
 const MAX_BYTES = 10 * 1024 * 1024;
@@ -10,9 +10,9 @@ function notice(title, message) {
     iconUrl: browser.runtime.getURL("icons/icon-48.png") }).catch(() => {});
 }
 function rebuildMenus() {
-  return state().then((data) => browser.menus.removeAll().then(() => {
-    browser.menus.create({ id: MENU_ROOT, title: "Send to A2B", contexts: ["image", "selection", "link"] });
-    data.channels.filter((channel) => channel.enabled).forEach((channel) => browser.menus.create({
+  return state().then((data) => browser.contextMenus.removeAll().then(() => {
+    browser.contextMenus.create({ id: MENU_ROOT, title: "Send to A2B", contexts: ["image", "selection", "link"] });
+    data.channels.filter((channel) => channel.enabled).forEach((channel) => browser.contextMenus.create({
       id: CHANNEL_PREFIX + channel.id, parentId: MENU_ROOT, title: channel.name,
       contexts: ["image", "selection", "link"]
     }));
@@ -37,15 +37,33 @@ async function verify(candidates) {
     try {
       const response = await fetch(candidate.url);
       const type = response.headers.get("content-type") || "";
-      if (!response.ok || !type.toLowerCase().startsWith("image/")) continue;
+      if (!response.ok || !/^(?:image|video)\//i.test(type)) continue;
       const blob = await response.blob();
       checked.push({ ...candidate, size: blob.size, type, width: 0, height: 0 });
     } catch (error) {}
   }
-  return checked.sort((a, b) => (b.size || 0) - (a.size || 0));
+  return checked.sort((a, b) => (b.score || 0) - (a.score || 0) || (b.size || 0) - (a.size || 0));
+}
+async function expandWithIMU(candidates) {
+  const expanded = [...candidates];
+  for (const candidate of candidates.slice(0, 8)) {
+    if (!/^https?:\/\//i.test(candidate.url || "")) continue;
+    const results = await LorapokIMU.resolve(candidate.url, { exclude_videos: false });
+    results.forEach((result, index) => {
+      if (!result || !result.url || expanded.some((item) => item.url === result.url)) return;
+      expanded.push({
+        url: result.url,
+        score: (result.is_original ? 5000 : 0) + (result.likely_bigger ? 1000 : 0) - index,
+        reason: "IMU original resolver",
+        imu: true,
+        video: Boolean(result.video)
+      });
+    });
+  }
+  return expanded;
 }
 async function prepare(request) {
-  const candidates = await verify(request.candidates);
+  const candidates = await verify(await expandWithIMU(request.candidates));
   return { ...request, candidates, selected: candidates[0] || request.candidates[0] };
 }
 async function upload(channel, request) {
@@ -66,8 +84,13 @@ async function upload(channel, request) {
     if (!fallback.ok) throw error;
   }
   const recent = (await state()).recent;
-  recent.unshift({ at: Date.now(), channel: channel.name, text: request.note || request.selected.url });
-  await browser.storage.local.set({ recent: recent.slice(0, 10) });
+  recent.unshift({
+    at: Date.now(),
+    channel: channel.name,
+    text: request.note || request.selected.url,
+    thumbnail: /^(?:image|video)\//i.test(request.selected.type || "") ? request.selected.url : ""
+  });
+  await browser.storage.local.set({ recent: recent.slice(0, 50) });
   notice("Lorapok Sorcerer", "Sent to " + channel.name);
 }
 async function openPreview(request) {
@@ -99,7 +122,7 @@ browser.runtime.onMessage.addListener(async (message) => {
   }
   return undefined;
 });
-browser.menus.onClicked.addListener(async (info, tab) => {
+browser.contextMenus.onClicked.addListener(async (info, tab) => {
   if (!String(info.menuItemId).startsWith(CHANNEL_PREFIX)) return;
   const data = await state();
   const channel = data.channels.find((item) => CHANNEL_PREFIX + item.id === info.menuItemId && item.enabled);

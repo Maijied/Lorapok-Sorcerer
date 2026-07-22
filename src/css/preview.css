@@ -4,8 +4,12 @@
 .brand strong, .brand small { display: block; }
 .brand small { color: var(--muted); margin-top: 3px; }
 #media { min-height: 220px; display: grid; place-items: center; }
-#media img { max-width: 100%; max-height: 330px; border-radius: 8px; box-shadow: 0 0 25px #00e5ff18; }
+#media img, #media video { cursor: zoom-in; max-width: 100%; max-height: 330px; border-radius: 8px; box-shadow: 0 0 25px #00e5ff18; transition: max-height .2s, transform .2s; }
+#media img.zoomed, #media video.zoomed { cursor: zoom-out; max-height: none; transform: scale(1.02); }
 .meta { color: var(--muted); font: 11px var(--mono); margin-top: 10px; }
 .candidates { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
-.candidate { padding: 6px 9px; font-size: 11px; color: var(--cyan); border: 1px solid #00e5ff44; border-radius: 6px; cursor: pointer; background: transparent; }
+.candidate { align-items: flex-start; display: flex; flex-direction: column; gap: 3px; padding: 7px 9px; font-size: 11px; color: var(--cyan); border: 1px solid #00e5ff44; border-radius: 6px; cursor: pointer; background: transparent; text-align: left; }
+.candidate small { color: var(--muted); font: 9px var(--mono); }
 .candidate.active { border-color: var(--green); color: var(--green); }
+.imu-badge { color: var(--green); font: 10px var(--mono); letter-spacing: .04em; margin-top: 6px; text-transform: uppercase; }
+.note-meta { color: var(--muted); display: flex; font: 10px var(--mono); justify-content: space-between; margin-top: 6px; }

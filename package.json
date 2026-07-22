@@ -9,6 +9,7 @@
     "build": "bash scripts/build.sh"
   },
   "devDependencies": {
-    "web-ext": "^8.9.0"
+    "web-ext": "^8.9.0",
+    "webextension-polyfill": "^0.12.0"
   }
 }
